@@ -19,7 +19,7 @@ router.route('/all')
   });
 router.route('/')
   .post((req, res) => {
-    debug('Router post movie')
+    debug('Router post movie');
     let newMovie = new Movie(req.body.title, req.body.director);
     storage[newMovie.id] = newMovie;
     res.status(200).json(newMovie);
@@ -27,7 +27,7 @@ router.route('/')
 
 router.route('/:id')
   .get((req, res) => {
-    debug('get single movie')
+    debug('get single movie');
     if (!storage[req.params.id]) {
       AppError.err404('no movie found').errMessage(res);
     }
@@ -35,7 +35,7 @@ router.route('/:id')
     res.status(200).json(movie);
   })
   .put((req, res) => {
-    debug('Put request on single movie')
+    debug('Put request on single movie');
     if(!storage[req.params.id]) {
       AppError.err404('no movie found').errMessage(res);
     }
@@ -44,7 +44,7 @@ router.route('/:id')
     res.json(storage[req.params.id]);
   })
   .delete((req, res) => {
-    debug('delete single movie')
+    debug('delete single movie');
     if (!storage[req.params.id]) {
       AppError.err404('no movie found').errMessage(res);
     }
