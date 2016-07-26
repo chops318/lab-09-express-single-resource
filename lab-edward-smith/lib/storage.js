@@ -1,3 +1,3 @@
-const storage = {}
+const storage = {};
 
 module.exports = storage;
