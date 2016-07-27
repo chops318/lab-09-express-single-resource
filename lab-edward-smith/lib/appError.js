@@ -16,8 +16,5 @@ AppError.err500 = function(message) {
   return new AppError(message, 500, 'internal server error');
 };
 
-AppError.prototype.errMessage = function(res) {
-  res.status(this.statusCode).json(this.responseMessage);
-};
 
 module.exports = AppError;

@@ -7,7 +7,6 @@ const storage = require('../lib/storage');
 const debug = require('debug')('router');
 const AppError = require('../lib/appError');
 
-
 router.route('/all')
   .get((req, res) => {
     debug('Router get all movies');
@@ -29,7 +28,7 @@ router.route('/:id')
   .get((req, res) => {
     debug('get single movie');
     if (!storage[req.params.id]) {
-      AppError.err404('no movie found').errMessage(res);
+      res.sendError(new AppError('no content', 404));
     }
     let movie = storage[req.params.id];
     res.status(200).json(movie);
@@ -37,7 +36,7 @@ router.route('/:id')
   .put((req, res) => {
     debug('Put request on single movie');
     if(!storage[req.params.id]) {
-      AppError.err404('no movie found').errMessage(res);
+      res.sendError(new AppError.err404('no content'));
     }
     if (req.body.title) storage[req.params.id].title = req.body.title;
     if (req.body.director) storage[req.params.id].director = req.body.director;
@@ -46,7 +45,7 @@ router.route('/:id')
   .delete((req, res) => {
     debug('delete single movie');
     if (!storage[req.params.id]) {
-      AppError.err404('no movie found').errMessage(res);
+      res.sendError(new AppError.err404('no content'));
     }
     delete storage[req.params.id];
     res.json('Deleted');
