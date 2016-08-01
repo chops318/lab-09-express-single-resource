@@ -19,6 +19,9 @@ router.route('/all')
 router.route('/')
   .post((req, res) => {
     debug('Router post movie');
+    if (!req.body.title || !req.body.director) {
+      return res.sendError(AppError.err400('invalid body'));
+    }
     let newMovie = new Movie(req.body.title, req.body.director);
     storage[newMovie.id] = newMovie;
     res.status(200).json(newMovie);
@@ -28,7 +31,10 @@ router.route('/:id')
   .get((req, res) => {
     debug('get single movie');
     if (!storage[req.params.id]) {
-      res.sendError(new AppError('no content', 404));
+      res.sendError(AppError.err404('not found'));
+    }
+    if (!req.params.id) {
+      res.sendError(AppError.err400('bad request'));
     }
     let movie = storage[req.params.id];
     res.status(200).json(movie);
