@@ -1,8 +1,9 @@
 const gulp   = require('gulp');
 const eslint = require('gulp-eslint');
 const mocha  = require('gulp-mocha');
+const nodemon = require('gulp-nodemon');
 
-var appFiles = ['lib/*.js', 'model/*.js', 'route/*.js', 'gulpfile.js'];
+var appFiles = ['lib/**/*.js', 'model/**/*.js', 'route/**/*.js', 'gulpfile.js'];
 var testFiles = ['test/**/*.js'];
 gulp.task('lint:app', () => {
   gulp.src(appFiles)
@@ -19,6 +20,13 @@ gulp.task('lint:test', () => {
 gulp.task('mocha:test', () => {
   gulp.src(testFiles)
     .pipe(mocha());
+});
+
+gulp.task('nodemon', function() {
+  nodemon({
+    script: 'server.js',
+    ext: 'js'
+  });
 });
 
 gulp.task('watch', () => {

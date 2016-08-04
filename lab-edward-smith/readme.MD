@@ -2,5 +2,5 @@
 ## Start server
  ```nodemon server.js```
   - Need to add
- 1. tests
- 2. Nodemon task on gulpfile
+ 1. Run mocha for tests
+ 2. Nodemon to start server
