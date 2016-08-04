@@ -2,7 +2,7 @@ const gulp   = require('gulp');
 const eslint = require('gulp-eslint');
 const mocha  = require('gulp-mocha');
 
-var appFiles = ['lib/**/*.js', 'model/**/*.js', 'route/**/*.js', 'gulpfile.js'];
+var appFiles = ['lib/*.js', 'model/*.js', 'route/*.js', 'gulpfile.js'];
 var testFiles = ['test/**/*.js'];
 gulp.task('lint:app', () => {
   gulp.src(appFiles)
